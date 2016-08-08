@@ -70,18 +70,23 @@ public abstract class Collector {
 
   /**
    * A single Sample, with a unique name and set of labels.
+   *
+   * 2016/08/08
+   * Add Unix time as custom timestamp.
    */
     public static class Sample {
       public final String name;
       public final List<String> labelNames;
       public final List<String> labelValues;  // Must have same length as labelNames.
       public final double value;
+      public final long timestamp;
 
-      public Sample(String name, List<String> labelNames, List<String> labelValues, double value) {
+      public Sample(String name, List<String> labelNames, List<String> labelValues, double value, long timestamp) {
         this.name = name;
         this.labelNames = labelNames;
         this.labelValues = labelValues;
         this.value = value;
+        this.timestamp = timestamp;
       }
 
       @Override
@@ -185,9 +190,6 @@ public abstract class Collector {
     } 
     if (d == Double.NEGATIVE_INFINITY) {
       return "-Inf";
-    }
-    if (Double.isNaN(d)) {
-      return "NaN";
     }
     return Double.toString(d);
   }
