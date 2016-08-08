@@ -96,7 +96,7 @@ public abstract class Collector {
         }
         Sample other = (Sample) obj;
         return other.name.equals(name) && other.labelNames.equals(labelNames)
-          && other.labelValues.equals(labelValues) && other.value == value;
+          && other.labelValues.equals(labelValues) && other.value == value && other.timestamp == timestamp;
       }
 
       @Override
@@ -107,13 +107,14 @@ public abstract class Collector {
         hash = 37 * hash + labelValues.hashCode();
         long d = Double.doubleToLongBits(value);
         hash = 37 * hash + (int)(d ^ (d >>> 32));
+        hash = 37 * hash + (int)(timestamp>>>32);
         return hash;
       }
 
       @Override
       public String toString() {
         return "Name: " + name + " LabelNames: " + labelNames + " labelValues: " + labelValues +
-          " Value: " + value;
+          " Value: " + value + " Timestamp: " + timestamp;
       }
     }
   }

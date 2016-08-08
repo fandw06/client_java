@@ -27,8 +27,10 @@ public class TextFormat {
           }
           writer.write("}");
         }
-        writer.write(" " + Collector.doubleToGoString(sample.value) + "\n");
+        writer.write(" " + Collector.doubleToGoString(sample.value));
+        writer.write(" " + Collector.doubleToGoString(sample.timestamp) + "\n");
       }
+
     }
   }
 
